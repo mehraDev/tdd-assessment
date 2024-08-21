@@ -8,8 +8,22 @@ export function add(numbers: string): number {
         const delimiter = numbers.substring( 2, delimiterEndIndex);
         const numbersString = numbers.substring(delimiterEndIndex + 1);
 
-        return numbersString.split(delimiter).map(num => parseInt(num, 10)).reduce((a,b) => a + b , 0);
+        const numbersArray = numbersString.split(delimiter).map(num => parseInt(num, 10));
+
+        const negativeNumbers = numbersArray.filter( num => num < 0);
+
+        if(negativeNumbers.length > 0) {
+            throw new Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
+        }
+       
+         return numbersArray.reduce((a, b) => a + b, 0);
     }
 
-    return numbers.split(/[\n,]/).map(num => parseInt(num, 10)).reduce((a,b) => a + b , 0);
+    const numberArray = numbers.split(/[\n,]/).map(num => parseInt(num, 10));
+    const negativeNumbers = numberArray.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
+        throw new Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
+    }
+
+    return numberArray.reduce((a, b) => a + b, 0);
 }
