@@ -15,3 +15,7 @@ test('should return the sum of two numbers', () => {
 test('should return the sum of any amount of numbers', () => {
     expect(add('1,2,4,5')).toBe(12);
 })
+
+test('should handle new line between numbers', () => {
+    expect(add('1\n3,5')).toBe(9);
+})
